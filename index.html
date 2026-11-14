@@ -33,14 +33,14 @@
             pointer-events: none;
         }
         .terminal-window {
-            max-width: 750px;
+            max-width: 780px;
             width: 100%;
             margin: 40px auto 0 auto;
             font-size: 15px;
             line-height: 1.6;
         }
         .terminal-line {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             word-break: break-word;
         }
         .terminal-highlight {
@@ -51,6 +51,14 @@
         }
         .terminal-warn {
             color: #ffcc00;
+        }
+        .terminal-link {
+            color: #00e5ff;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .terminal-link:hover {
+            color: #ffffff;
         }
         .cursor {
             display: inline-block;
@@ -178,14 +186,32 @@
             background-color: #eef3f8;
             border: 1px solid #a2a9b1;
             border-left: 4px solid #3366cc;
-            padding: 8px 14px;
+            padding: 10px 14px;
             font-size: 13px;
             margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
+        }
+        .banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .upol-link-btn {
+            background-color: #004990;
+            color: #ffffff !important;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none !important;
+        }
+        .upol-link-btn:hover {
+            background-color: #003163;
         }
         .replay-hack {
             font-size: 12px;
@@ -384,8 +410,11 @@
         </div>
 
         <div class="secret-banner">
-            <span>🔓 <b>Odtajněný záznam:</b> Data úspěšně extrahována z centrálního archivu Právnické fakulty v Olomouci.</span>
-            <button class="replay-hack" onclick="startHack()">Přehrát znovu připojení k serveru</button>
+            <span>🔓 <b>Odtajněný záznam:</b> Data úspěšně extrahována ze serveru Právnické fakulty v Olomouci.</span>
+            <div class="banner-actions">
+                <a href="upol.html" class="upol-link-btn">Zobrazit zdrojový spis PF UP &rarr;</a>
+                <button class="replay-hack" onclick="startHack()">Přehrát znovu hack</button>
+            </div>
         </div>
 
         <h1>prof. JUDr. Blanka Celtová</h1>
@@ -404,7 +433,7 @@
                 </tr>
                 <tr>
                     <th>Působiště</th>
-                    <td><a href="#sport">Olomouc</a></td>
+                    <td><a href="upol.html">Právnická fakulta UP, Olomouc</a></td>
                 </tr>
                 <tr>
                     <th>Jazyky</th>
@@ -422,11 +451,115 @@
         </aside>
 
         <p>
-            <b>prof. JUDr. Blanka Celtová</b> je významná česká právnička, vysokoškolská pedagožka, polyglotka, malířka a rekordmanka v běhu, působící především v <a href="#sport">Olomouci</a>. V odborných i společenských kruzích je proslulá unikátní kombinací špičkového právního intelektu, mimořádného uměleckého nadání a běžeckého tempa, kterému podle očitých svědků nestíhají ani místní tramvaje.<sup><a href="#ref2">[2]</a></sup>
+            <b>prof. JUDr. Blanka Celtová</b> je významná česká právnička, vysokoškolská pedagožka, polyglotka, malířka a rekordmanka v běhu, působící na <a href="upol.html">Právnické fakultě v Olomouci</a>. V odborných i společenských kruzích je proslulá unikátní kombinací špičkového právního intelektu, mimořádného uměleckého nadání a běžeckého tempa, kterému podle očitých svědků nestíhají ani místní tramvaje.<sup><a href="#ref2">[2]</a></sup>
         </p>
 
         <div class="toc">
             <div class="toc-title">Obsah</div>
             <ul>
                 <li><a href="#pravo"><span class="toc-number">1</span> Akademická a právní kariéra</a></li>
-                <li><a href="#jazyky"><span class="toc-number">2</span> Jazyková vybavenost a filozofie</a>
+                <li><a href="#jazyky"><span class="toc-number">2</span> Jazyková vybavenost a filozofie</a></li>
+                <li><a href="#sport"><span class="toc-number">3</span> Sportovní úspěchy v Olomouci</a></li>
+                <li><a href="#umeni"><span class="toc-number">4</span> Výtvarná tvorba</a></li>
+                <li><a href="#reference"><span class="toc-number">5</span> Reference</a></li>
+            </ul>
+        </div>
+
+        <h2 id="pravo">Akademická a právní kariéra</h2>
+        <p>
+            Blanka Celtová dosáhla nejvyšší vědecko-pedagogické hodnosti v oboru práva a stala se profesorkou. Její právní argumentace je považována za natolik neprůstřelnou, že v jakékoliv debatě získává okamžitou převahu – často ještě dříve, než protistrana stihne doříct první větu.<sup><a href="#ref3">[3]</a></sup>
+        </p>
+
+        <h2 id="jazyky">Jazyková vybavenost a filozofie</h2>
+        <p>
+            Kromě rodné češtiny ovládá plynně několik dalších světových jazyků, konkrétně <b>polštinu</b>, <b>angličtinu</b> a <b>španělštinu</b>. Díky této jazykové výbavě dokáže suverénně vyjednávat, číst odbornou literaturu i okouzlit publikum v podstatě na kterémkoliv kontinentu.
+        </p>
+        <p>
+            Se španělským jazykovým prostředím je spjato i její slavné životní motto, které shrnuje vývoj jejích gastronomických preferencí od dětství po současnost:
+        </p>
+
+        <div class="wiki-quote">
+            „Cuando era pequeña, no me gustaba la verdura.“ <br>
+            <span style="font-style: normal; font-size: 13px; color: #54595d;">(česky: „Když jsem byla malá, neměla jsem ráda zeleninu.“)</span>
+            <div class="wiki-quote-author">— Blanka Celtová, osobní krédo<sup><a href="#ref1">[1]</a></sup></div>
+        </div>
+
+        <h2 id="sport">Sportovní úspěchy v Olomouci</h2>
+        <p>
+            Ve sportovní komunitě je Blanka Celtová dlouhodobě uznávána jako <b>nejlepší běžkyně v Olomouci</b>. Jejích výkonů v olomouckých parcích a ulicích si nelze nevšimnout; kombinace vytrvalosti a lehkosti kroku z ní činí absolutní špičku hanácké atletiky.<sup><a href="#ref2">[2]</a></sup>
+        </p>
+
+        <h2 id="umeni">Výtvarná tvorba</h2>
+        <p>
+            Vedle racionálního světa paragrafů a vytrvalostního sportu vyniká Blanka Celtová také v umělecké sféře. Její obrazy se vyznačují mimořádným citem pro detail, barvy a kompozici. Odborná veřejnost se shoduje na tom, že cokoliv vezme do ruky – ať už jde o štětec, právní spis nebo běžecké boty –, promění v mistrovské dílo.<sup><a href="#ref3">[3]</a></sup>
+        </p>
+
+        <h2 id="reference">Reference</h2>
+        <ol class="references">
+            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové (<a href="upol.html">extrahováno z tajného fakultního trezoru PF UP</a>).</li>
+            <li id="ref2">Nezávislé měření rychlosti v olomouckých sadech, 2026.</li>
+            <li id="ref3"><a href="upol.html">Mimořádné usnesení kolegia děkana PF UPOL: Síň slávy</a>, Olomouc 2026.</li>
+        </ol>
+
+        <div class="categories">
+            <a href="#">Kategorie</a>: <a href="#">České právničky</a> | <a href="#">Profesorky práva</a> | <a href="#">České malířky</a> | <a href="#">Běžkyně z Olomouce</a> | <a href="#">Polyglotky</a>
+        </div>
+    </main>
+
+    <script>
+        const lines = [
+            { text: "> Navazuji spojení se serverem: pf.upol.cz (Právnická fakulta Olomouc)...", delay: 300 },
+            { text: "> Obcházím fakultní firewall... [OK]", delay: 950 },
+            { text: "> Hledám tajnou složku: 'prof. JUDr. Blanka Celtová'...", delay: 1650, warn: true },
+            { text: "> Nalezeno: 1 přísně tajný spis (Jazyky: 4 | Běh: MAX | Umění: 100%)", delay: 2450 },
+            { html: '> Záloha původního dokumentu fakulty: <a href="upol.html" class="terminal-link">[pf.upol.cz/sin-slavy/blanka-celtova]</a>', delay: 3250 },
+            { text: "> PŘÍSTUP POVOLEN. Otevírám profil na Wikipedii...", delay: 4200, highlight: true }
+        ];
+
+        let timers = [];
+
+        function startHack() {
+            const overlay = document.getElementById("hacker-overlay");
+            const output = document.getElementById("terminal-output");
+            timers.forEach(t => clearTimeout(t));
+            timers = [];
+            output.innerHTML = "";
+            overlay.style.display = "flex";
+            overlay.classList.remove("fade-out");
+
+            lines.forEach((line) => {
+                const t = setTimeout(() => {
+                    const div = document.createElement("div");
+                    div.className = "terminal-line";
+                    if (line.warn) div.classList.add("terminal-warn");
+                    if (line.highlight) {
+                        div.innerHTML = `<span class="terminal-highlight">${line.text}</span>`;
+                    } else if (line.html) {
+                        div.innerHTML = line.html;
+                    } else {
+                        div.textContent = line.text;
+                    }
+                    output.appendChild(div);
+                }, line.delay);
+                timers.push(t);
+            });
+
+            const endTimer = setTimeout(() => {
+                closeHack();
+            }, 5600);
+            timers.push(endTimer);
+        }
+
+        function closeHack() {
+            timers.forEach(t => clearTimeout(t));
+            const overlay = document.getElementById("hacker-overlay");
+            overlay.classList.add("fade-out");
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 800);
+        }
+
+        window.onload = startHack;
+    </script>
+</body>
+</html>
