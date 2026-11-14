@@ -13,7 +13,73 @@
             padding: 0;
             line-height: 1.6;
         }
-        /* Horní lišta Wikipedie */
+
+        /* --- HACKER OVERLAY (Úvodní terminál) --- */
+        #hacker-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #050805;
+            color: #00ff41;
+            font-family: "Courier New", Courier, monospace;
+            z-index: 9999;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: opacity 0.8s ease;
+        }
+        #hacker-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .terminal-window {
+            max-width: 750px;
+            width: 100%;
+            margin: 40px auto 0 auto;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .terminal-line {
+            margin-bottom: 6px;
+            word-break: break-word;
+        }
+        .terminal-highlight {
+            color: #ffffff;
+            background-color: #008f11;
+            padding: 2px 6px;
+            font-weight: bold;
+        }
+        .terminal-warn {
+            color: #ffcc00;
+        }
+        .cursor {
+            display: inline-block;
+            width: 9px;
+            height: 16px;
+            background-color: #00ff41;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        .skip-btn {
+            align-self: flex-end;
+            background: transparent;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            font-family: "Courier New", Courier, monospace;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .skip-btn:hover {
+            background: #00ff41;
+            color: #050805;
+        }
+
+        /* --- WIKIPEDIE STYLY --- */
         .wiki-header {
             background-color: #ffffff;
             border-bottom: 1px solid #a2a9b1;
@@ -78,7 +144,6 @@
             font-size: 13px;
             cursor: pointer;
         }
-        /* Hlavní kontejner článku */
         .wiki-container {
             max-width: 1100px;
             margin: 0 auto;
@@ -88,7 +153,6 @@
             border-right: 1px solid #eaecf0;
             min-height: 100vh;
         }
-        /* Záložky článku */
         .wiki-tabs {
             display: flex;
             justify-content: space-between;
@@ -110,7 +174,28 @@
             border-bottom: 2px solid #202122;
             font-weight: 500;
         }
-        /* Nadpisy */
+        .secret-banner {
+            background-color: #eef3f8;
+            border: 1px solid #a2a9b1;
+            border-left: 4px solid #3366cc;
+            padding: 8px 14px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .replay-hack {
+            font-size: 12px;
+            color: #3366cc;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+        }
         h1 {
             font-family: "Linux Libertine", "Georgia", "Times", serif;
             font-size: 28.8px;
@@ -150,7 +235,6 @@
             font-size: 11px;
             line-height: 1;
         }
-        /* Infobox */
         .infobox {
             float: right;
             clear: right;
@@ -213,7 +297,6 @@
         .infobox tr {
             border-top: 1px solid #eaecf0;
         }
-        /* Obsah (TOC) */
         .toc {
             display: inline-block;
             background-color: #f8f9fa;
@@ -239,7 +322,6 @@
             color: #202122;
             margin-right: 5px;
         }
-        /* Citát */
         .wiki-quote {
             background-color: #f8f9fa;
             border-left: 3px solid #3366cc;
@@ -253,14 +335,6 @@
             font-size: 12.5px;
             color: #54595d;
             margin-top: 4px;
-        }
-        /* Seznamy a reference */
-        ul.wiki-list {
-            padding-left: 22px;
-            font-size: 14.5px;
-        }
-        ul.wiki-list li {
-            margin-bottom: 6px;
         }
         ol.references {
             font-size: 12.5px;
@@ -287,10 +361,22 @@
             .wiki-container {
                 padding: 16px;
             }
+            .terminal-window {
+                font-size: 13px;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- Hackerská úvodní obrazovka -->
+    <div id="hacker-overlay">
+        <div class="terminal-window" id="terminal-output">
+            <div class="terminal-line">root@mainframe:~$ <span class="cursor"></span></div>
+        </div>
+        <button class="skip-btn" onclick="closeHack()">[ Přeskočit dekódování ]</button>
+    </div>
 
     <header class="wiki-header">
         <a href="#" class="wiki-logo">
@@ -319,15 +405,17 @@
             </div>
         </div>
 
+        <div class="secret-banner">
+            <span>🔓 <b>Odtajněný záznam:</b> Data úspěšně extrahována z centrálního archivu Právnické fakulty v Olomouci.</span>
+            <button class="replay-hack" onclick="startHack()">Přehrát znovu připojení k serveru</button>
+        </div>
+
         <h1>prof. JUDr. Blanka Celtová</h1>
         <div class="site-sub">Z Wikipedie, otevřené encyklopedie</div>
 
-        <!-- Infobox -->
         <aside class="infobox">
             <div class="infobox-title">prof. JUDr. Blanka Celtová</div>
             <div class="infobox-image">
-                <!-- Pokud chceš vložit fotku, smaž div níže a odkomentuj řádek s img: -->
-                <!-- <img src="odkaz-na-fotku.jpg" alt="Blanka Celtová" style="width: 220px; border: 1px solid #a2a9b1;"> -->
                 <div class="infobox-image-placeholder">
                     <span>[Zde může být její fotka]</span>
                     <small style="margin-top:6px;">Oficiální portrét (nebo momentka z běhu)</small>
@@ -357,7 +445,7 @@
                 </tr>
                 <tr>
                     <th>Ocenění</th>
-                    <td>Neoficiální i oficiální královna olomouckých běžeckých tras<sup><a href="#ref2">[2]</a></sup></td>
+                    <td>Královna olomouckých běžeckých tras<sup><a href="#ref2">[2]</a></sup></td>
                 </tr>
             </table>
         </aside>
@@ -366,7 +454,6 @@
             <b>prof. JUDr. Blanka Celtová</b> je významná česká právnička, vysokoškolská pedagožka, polyglotka, malířka a rekordmanka v běhu, působící především v <a href="#sport">Olomouci</a>. V odborných i společenských kruzích je proslulá unikátní kombinací špičkového právního intelektu, mimořádného uměleckého nadání a běžeckého tempa, kterému podle očitých svědků nestíhají ani místní tramvaje.<sup><a href="#ref2">[2]</a></sup>
         </p>
 
-        <!-- Obsah -->
         <div class="toc">
             <div class="toc-title">Obsah</div>
             <ul>
@@ -409,7 +496,7 @@
 
         <h2 id="reference">Reference</h2>
         <ol class="references">
-            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové.</li>
+            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové (extrahováno z tajného fakultního trezoru).</li>
             <li id="ref2">Nezávislé měření rychlosti v olomouckých sadech, 2026.</li>
             <li id="ref3">Kolektiv obdivovatelů: <i>Encyklopedie výjimečných osobností</i>, Praha/Olomouc 2026.</li>
         </ol>
@@ -419,5 +506,58 @@
         </div>
     </main>
 
+    <script>
+        const lines = [
+            { text: "> Navazuji spojení se serverem: pf.upol.cz (Právnická fakulta Olomouc)...", delay: 300 },
+            { text: "> Obcházím fakultní firewall... [OK]", delay: 900 },
+            { text: "> Hledám tajnou složku: 'prof. JUDr. Blanka Celtová'...", delay: 1600, warn: true },
+            { text: "> Nalezeno: 1 přísně tajný spis (Jazyky: 4 | Běh: MAX | Umění: 100%)", delay: 2400 },
+            { text: "> Dešifruji data a převádím do veřejné encyklopedie...", delay: 3200 },
+            { text: "> PŘÍSTUP POVOLEN. Otevírám profil...", delay: 3900, highlight: true }
+        ];
+
+        let timers = [];
+
+        function startHack() {
+            const overlay = document.getElementById("hacker-overlay");
+            const output = document.getElementById("terminal-output");
+            timers.forEach(t => clearTimeout(t));
+            timers = [];
+            output.innerHTML = "";
+            overlay.style.display = "flex";
+            overlay.classList.remove("fade-out");
+
+            lines.forEach((line) => {
+                const t = setTimeout(() => {
+                    const div = document.createElement("div");
+                    div.className = "terminal-line";
+                    if (line.warn) div.classList.add("terminal-warn");
+                    if (line.highlight) {
+                        div.innerHTML = `<span class="terminal-highlight">${line.text}</span>`;
+                    } else {
+                        div.textContent = line.text;
+                    }
+                    output.appendChild(div);
+                }, line.delay);
+                timers.push(t);
+            });
+
+            const endTimer = setTimeout(() => {
+                closeHack();
+            }, 4800);
+            timers.push(endTimer);
+        }
+
+        function closeHack() {
+            timers.forEach(t => clearTimeout(t));
+            const overlay = document.getElementById("hacker-overlay");
+            overlay.classList.add("fade-out");
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 800);
+        }
+
+        window.onload = startHack;
+    </script>
 </body>
 </html>
