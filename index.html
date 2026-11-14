@@ -252,36 +252,11 @@
             font-weight: bold;
             font-size: 15px;
             padding: 6px;
-            margin-bottom: 6px;
-        }
-        .infobox-image {
-            text-align: center;
-            padding: 4px 0 8px 0;
-        }
-        .infobox-image-placeholder {
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 6px auto;
-            background-color: #eaecf0;
-            border: 1px dashed #a2a9b1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #54595d;
-            font-size: 12px;
-            padding: 12px;
-            box-sizing: border-box;
-        }
-        .infobox-caption {
-            font-size: 11.5px;
-            color: #54595d;
-            padding: 0 8px;
+            margin-bottom: 4px;
         }
         .infobox table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 6px;
         }
         .infobox th {
             text-align: left;
@@ -296,6 +271,9 @@
         }
         .infobox tr {
             border-top: 1px solid #eaecf0;
+        }
+        .infobox tr:first-child {
+            border-top: none;
         }
         .toc {
             display: inline-block;
@@ -415,13 +393,6 @@
 
         <aside class="infobox">
             <div class="infobox-title">prof. JUDr. Blanka Celtová</div>
-            <div class="infobox-image">
-                <div class="infobox-image-placeholder">
-                    <span>[Zde může být její fotka]</span>
-                    <small style="margin-top:6px;">Oficiální portrét (nebo momentka z běhu)</small>
-                </div>
-                <div class="infobox-caption">Blanka Celtová v plném nasazení (ilustrační prostor)</div>
-            </div>
             <table>
                 <tr>
                     <th>Tituly</th>
@@ -458,106 +429,4 @@
             <div class="toc-title">Obsah</div>
             <ul>
                 <li><a href="#pravo"><span class="toc-number">1</span> Akademická a právní kariéra</a></li>
-                <li><a href="#jazyky"><span class="toc-number">2</span> Jazyková vybavenost a filozofie</a></li>
-                <li><a href="#sport"><span class="toc-number">3</span> Sportovní úspěchy v Olomouci</a></li>
-                <li><a href="#umeni"><span class="toc-number">4</span> Výtvarná tvorba</a></li>
-                <li><a href="#reference"><span class="toc-number">5</span> Reference</a></li>
-            </ul>
-        </div>
-
-        <h2 id="pravo">Akademická a právní kariéra</h2>
-        <p>
-            Blanka Celtová dosáhla nejvyšší vědecko-pedagogické hodnosti v oboru práva a stala se profesorkou. Její právní argumentace je považována za natolik neprůstřelnou, že v jakékoliv debatě získává okamžitou převahu – často ještě dříve, než protistrana stihne doříct první větu.<sup><a href="#ref3">[3]</a></sup>
-        </p>
-
-        <h2 id="jazyky">Jazyková vybavenost a filozofie</h2>
-        <p>
-            Kromě rodné češtiny ovládá plynně několik dalších světových jazyků, konkrétně <b>polštinu</b>, <b>angličtinu</b> a <b>španělštinu</b>. Díky této jazykové výbavě dokáže suverénně vyjednávat, číst odbornou literaturu i okouzlit publikum v podstatě na kterémkoliv kontinentu.
-        </p>
-        <p>
-            Se španělským jazykovým prostředím je spjato i její slavné životní motto, které shrnuje vývoj jejích gastronomických preferencí od dětství po současnost:
-        </p>
-
-        <div class="wiki-quote">
-            „Cuando era pequeña, no me gustaba la verdura.“ <br>
-            <span style="font-style: normal; font-size: 13px; color: #54595d;">(česky: „Když jsem byla malá, neměla jsem ráda zeleninu.“)</span>
-            <div class="wiki-quote-author">— Blanka Celtová, osobní krédo<sup><a href="#ref1">[1]</a></sup></div>
-        </div>
-
-        <h2 id="sport">Sportovní úspěchy v Olomouci</h2>
-        <p>
-            Ve sportovní komunitě je Blanka Celtová dlouhodobě uznávána jako <b>nejlepší běžkyně v Olomouci</b>. Jejích výkonů v olomouckých parcích a ulicích si nelze nevšimnout; kombinace vytrvalosti a lehkosti kroku z ní činí absolutní špičku hanácké atletiky.<sup><a href="#ref2">[2]</a></sup>
-        </p>
-
-        <h2 id="umeni">Výtvarná tvorba</h2>
-        <p>
-            Vedle racionálního světa paragrafů a vytrvalostního sportu vyniká Blanka Celtová také v umělecké sféře. Její obrazy se vyznačují mimořádným citem pro detail, barvy a kompozici. Odborná veřejnost se shoduje na tom, že cokoliv vezme do ruky – ať už jde o štětec, právní spis nebo běžecké boty –, promění v mistrovské dílo.<sup><a href="#ref3">[3]</a></sup>
-        </p>
-
-        <h2 id="reference">Reference</h2>
-        <ol class="references">
-            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové (extrahováno z tajného fakultního trezoru).</li>
-            <li id="ref2">Nezávislé měření rychlosti v olomouckých sadech, 2026.</li>
-            <li id="ref3">Kolektiv obdivovatelů: <i>Encyklopedie výjimečných osobností</i>, Praha/Olomouc 2026.</li>
-        </ol>
-
-        <div class="categories">
-            <a href="#">Kategorie</a>: <a href="#">České právničky</a> | <a href="#">Profesorky práva</a> | <a href="#">České malířky</a> | <a href="#">Běžkyně z Olomouce</a> | <a href="#">Polyglotky</a>
-        </div>
-    </main>
-
-    <script>
-        const lines = [
-            { text: "> Navazuji spojení se serverem: pf.upol.cz (Právnická fakulta Olomouc)...", delay: 300 },
-            { text: "> Obcházím fakultní firewall... [OK]", delay: 900 },
-            { text: "> Hledám tajnou složku: 'prof. JUDr. Blanka Celtová'...", delay: 1600, warn: true },
-            { text: "> Nalezeno: 1 přísně tajný spis (Jazyky: 4 | Běh: MAX | Umění: 100%)", delay: 2400 },
-            { text: "> Dešifruji data a převádím do veřejné encyklopedie...", delay: 3200 },
-            { text: "> PŘÍSTUP POVOLEN. Otevírám profil...", delay: 3900, highlight: true }
-        ];
-
-        let timers = [];
-
-        function startHack() {
-            const overlay = document.getElementById("hacker-overlay");
-            const output = document.getElementById("terminal-output");
-            timers.forEach(t => clearTimeout(t));
-            timers = [];
-            output.innerHTML = "";
-            overlay.style.display = "flex";
-            overlay.classList.remove("fade-out");
-
-            lines.forEach((line) => {
-                const t = setTimeout(() => {
-                    const div = document.createElement("div");
-                    div.className = "terminal-line";
-                    if (line.warn) div.classList.add("terminal-warn");
-                    if (line.highlight) {
-                        div.innerHTML = `<span class="terminal-highlight">${line.text}</span>`;
-                    } else {
-                        div.textContent = line.text;
-                    }
-                    output.appendChild(div);
-                }, line.delay);
-                timers.push(t);
-            });
-
-            const endTimer = setTimeout(() => {
-                closeHack();
-            }, 4800);
-            timers.push(endTimer);
-        }
-
-        function closeHack() {
-            timers.forEach(t => clearTimeout(t));
-            const overlay = document.getElementById("hacker-overlay");
-            overlay.classList.add("fade-out");
-            setTimeout(() => {
-                overlay.style.display = "none";
-            }, 800);
-        }
-
-        window.onload = startHack;
-    </script>
-</body>
-</html>
+                <li><a href="#jazyky"><span class="toc-number">2</span> Jazyková vybavenost a filozofie</a>
