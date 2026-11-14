@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blanka Celtová – Wikipedie</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Lato, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #202122;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        /* Horní lišta Wikipedie */
+        .wiki-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .wiki-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #000;
+        }
+        .wiki-logo-globe {
+            width: 40px;
+            height: 40px;
+            background: #eaecf0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Linux Libertine", "Georgia", serif;
+            font-weight: bold;
+            font-size: 22px;
+            border: 1px solid #a2a9b1;
+        }
+        .wiki-logo-text {
+            font-family: "Linux Libertine", "Georgia", "Times", serif;
+            line-height: 1.1;
+        }
+        .wiki-logo-title {
+            font-size: 20px;
+            letter-spacing: 0.5px;
+        }
+        .wiki-logo-subtitle {
+            font-size: 11px;
+            color: #54595d;
+        }
+        .wiki-search {
+            display: flex;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            overflow: hidden;
+            width: 300px;
+            max-width: 45%;
+        }
+        .wiki-search input {
+            border: none;
+            padding: 6px 10px;
+            width: 100%;
+            font-size: 13px;
+            outline: none;
+        }
+        .wiki-search button {
+            background: #f8f9fa;
+            border: none;
+            border-left: 1px solid #a2a9b1;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        /* Hlavní kontejner článku */
+        .wiki-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 24px 36px 48px 36px;
+            border-left: 1px solid #eaecf0;
+            border-right: 1px solid #eaecf0;
+            min-height: 100vh;
+        }
+        /* Záložky článku */
+        .wiki-tabs {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #a2a9b1;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        .wiki-tab-group {
+            display: flex;
+            gap: 16px;
+        }
+        .wiki-tab {
+            padding-bottom: 6px;
+            color: #3366cc;
+            text-decoration: none;
+        }
+        .wiki-tab.active {
+            color: #202122;
+            border-bottom: 2px solid #202122;
+            font-weight: 500;
+        }
+        /* Nadpisy */
+        h1 {
+            font-family: "Linux Libertine", "Georgia", "Times", serif;
+            font-size: 28.8px;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            margin: 0 0 4px 0;
+            padding-bottom: 4px;
+            line-height: 1.3;
+        }
+        .site-sub {
+            font-size: 12.8px;
+            color: #54595d;
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-family: "Linux Libertine", "Georgia", "Times", serif;
+            font-size: 21px;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 14.5px;
+        }
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        sup {
+            font-size: 11px;
+            line-height: 1;
+        }
+        /* Infobox */
+        .infobox {
+            float: right;
+            clear: right;
+            width: 280px;
+            margin: 0 0 16px 24px;
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 6px;
+            font-size: 12.8px;
+            line-height: 1.45;
+        }
+        .infobox-title {
+            background-color: #cedff2;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 6px;
+            margin-bottom: 6px;
+        }
+        .infobox-image {
+            text-align: center;
+            padding: 4px 0 8px 0;
+        }
+        .infobox-image-placeholder {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 6px auto;
+            background-color: #eaecf0;
+            border: 1px dashed #a2a9b1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #54595d;
+            font-size: 12px;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        .infobox-caption {
+            font-size: 11.5px;
+            color: #54595d;
+            padding: 0 8px;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }
+        .infobox th {
+            text-align: left;
+            vertical-align: top;
+            padding: 5px 6px;
+            width: 38%;
+            color: #202122;
+        }
+        .infobox td {
+            vertical-align: top;
+            padding: 5px 6px;
+        }
+        .infobox tr {
+            border-top: 1px solid #eaecf0;
+        }
+        /* Obsah (TOC) */
+        .toc {
+            display: inline-block;
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px 18px 10px 14px;
+            margin: 10px 0 18px 0;
+            font-size: 13.5px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc li {
+            margin-bottom: 3px;
+        }
+        .toc-number {
+            color: #202122;
+            margin-right: 5px;
+        }
+        /* Citát */
+        .wiki-quote {
+            background-color: #f8f9fa;
+            border-left: 3px solid #3366cc;
+            padding: 10px 16px;
+            margin: 14px 0;
+            font-style: italic;
+            font-size: 14px;
+        }
+        .wiki-quote-author {
+            font-style: normal;
+            font-size: 12.5px;
+            color: #54595d;
+            margin-top: 4px;
+        }
+        /* Seznamy a reference */
+        ul.wiki-list {
+            padding-left: 22px;
+            font-size: 14.5px;
+        }
+        ul.wiki-list li {
+            margin-bottom: 6px;
+        }
+        ol.references {
+            font-size: 12.5px;
+            color: #54595d;
+            padding-left: 22px;
+        }
+        ol.references li {
+            margin-bottom: 4px;
+        }
+        .categories {
+            margin-top: 32px;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            font-size: 12.8px;
+        }
+        @media (max-width: 720px) {
+            .infobox {
+                float: none;
+                width: 100%;
+                margin: 0 0 18px 0;
+                box-sizing: border-box;
+            }
+            .wiki-container {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="wiki-header">
+        <a href="#" class="wiki-logo">
+            <div class="wiki-logo-globe">W</div>
+            <div class="wiki-logo-text">
+                <div class="wiki-logo-title">WIKIPEDIE</div>
+                <div class="wiki-logo-subtitle">Otevřená encyklopedie</div>
+            </div>
+        </a>
+        <div class="wiki-search">
+            <input type="text" value="Blanka Celtová" readonly>
+            <button>Hledat</button>
+        </div>
+    </header>
+
+    <main class="wiki-container">
+        <div class="wiki-tabs">
+            <div class="wiki-tab-group">
+                <a href="#" class="wiki-tab active">Článek</a>
+                <a href="#" class="wiki-tab">Diskuse</a>
+            </div>
+            <div class="wiki-tab-group">
+                <a href="#" class="wiki-tab active">Číst</a>
+                <a href="#" class="wiki-tab">Zobrazit zdroj</a>
+                <a href="#" class="wiki-tab">Zobrazit historii</a>
+            </div>
+        </div>
+
+        <h1>prof. JUDr. Blanka Celtová</h1>
+        <div class="site-sub">Z Wikipedie, otevřené encyklopedie</div>
+
+        <!-- Infobox -->
+        <aside class="infobox">
+            <div class="infobox-title">prof. JUDr. Blanka Celtová</div>
+            <div class="infobox-image">
+                <!-- Pokud chceš vložit fotku, smaž div níže a odkomentuj řádek s img: -->
+                <!-- <img src="odkaz-na-fotku.jpg" alt="Blanka Celtová" style="width: 220px; border: 1px solid #a2a9b1;"> -->
+                <div class="infobox-image-placeholder">
+                    <span>[Zde může být její fotka]</span>
+                    <small style="margin-top:6px;">Oficiální portrét (nebo momentka z běhu)</small>
+                </div>
+                <div class="infobox-caption">Blanka Celtová v plném nasazení (ilustrační prostor)</div>
+            </div>
+            <table>
+                <tr>
+                    <th>Tituly</th>
+                    <td>prof., JUDr.</td>
+                </tr>
+                <tr>
+                    <th>Obor</th>
+                    <td><a href="#pravo">Právní vědy</a>, <a href="#umeni">malířství</a>, <a href="#sport">vytrvalostní běh</a></td>
+                </tr>
+                <tr>
+                    <th>Působiště</th>
+                    <td><a href="#sport">Olomouc</a></td>
+                </tr>
+                <tr>
+                    <th>Jazyky</th>
+                    <td>čeština, polština, angličtina, španělština</td>
+                </tr>
+                <tr>
+                    <th>Životní motto</th>
+                    <td><i>„Cuando era pequeña, no me gustaba la verdura.“</i><sup><a href="#ref1">[1]</a></sup></td>
+                </tr>
+                <tr>
+                    <th>Ocenění</th>
+                    <td>Neoficiální i oficiální královna olomouckých běžeckých tras<sup><a href="#ref2">[2]</a></sup></td>
+                </tr>
+            </table>
+        </aside>
+
+        <p>
+            <b>prof. JUDr. Blanka Celtová</b> je významná česká právnička, vysokoškolská pedagožka, polyglotka, malířka a rekordmanka v běhu, působící především v <a href="#sport">Olomouci</a>. V odborných i společenských kruzích je proslulá unikátní kombinací špičkového právního intelektu, mimořádného uměleckého nadání a běžeckého tempa, kterému podle očitých svědků nestíhají ani místní tramvaje.<sup><a href="#ref2">[2]</a></sup>
+        </p>
+
+        <!-- Obsah -->
+        <div class="toc">
+            <div class="toc-title">Obsah</div>
+            <ul>
+                <li><a href="#pravo"><span class="toc-number">1</span> Akademická a právní kariéra</a></li>
+                <li><a href="#jazyky"><span class="toc-number">2</span> Jazyková vybavenost a filozofie</a></li>
+                <li><a href="#sport"><span class="toc-number">3</span> Sportovní úspěchy v Olomouci</a></li>
+                <li><a href="#umeni"><span class="toc-number">4</span> Výtvarná tvorba</a></li>
+                <li><a href="#reference"><span class="toc-number">5</span> Reference</a></li>
+            </ul>
+        </div>
+
+        <h2 id="pravo">Akademická a právní kariéra</h2>
+        <p>
+            Blanka Celtová dosáhla nejvyšší vědecko-pedagogické hodnosti v oboru práva a stala se profesorkou. Její právní argumentace je považována za natolik neprůstřelnou, že v jakékoliv debatě získává okamžitou převahu – často ještě dříve, než protistrana stihne doříct první větu.<sup><a href="#ref3">[3]</a></sup>
+        </p>
+
+        <h2 id="jazyky">Jazyková vybavenost a filozofie</h2>
+        <p>
+            Kromě rodné češtiny ovládá plynně několik dalších světových jazyků, konkrétně <b>polštinu</b>, <b>angličtinu</b> a <b>španělštinu</b>. Díky této jazykové výbavě dokáže suverénně vyjednávat, číst odbornou literaturu i okouzlit publikum v podstatě na kterémkoliv kontinentu.
+        </p>
+        <p>
+            Se španělským jazykovým prostředím je spjato i její slavné životní motto, které shrnuje vývoj jejích gastronomických preferencí od dětství po současnost:
+        </p>
+
+        <div class="wiki-quote">
+            „Cuando era pequeña, no me gustaba la verdura.“ <br>
+            <span style="font-style: normal; font-size: 13px; color: #54595d;">(česky: „Když jsem byla malá, neměla jsem ráda zeleninu.“)</span>
+            <div class="wiki-quote-author">— Blanka Celtová, osobní krédo<sup><a href="#ref1">[1]</a></sup></div>
+        </div>
+
+        <h2 id="sport">Sportovní úspěchy v Olomouci</h2>
+        <p>
+            Ve sportovní komunitě je Blanka Celtová dlouhodobě uznávána jako <b>nejlepší běžkyně v Olomouci</b>. Jejích výkonů v olomouckých parcích a ulicích si nelze nevšimnout; kombinace vytrvalosti a lehkosti kroku z ní činí absolutní špičku hanácké atletiky.<sup><a href="#ref2">[2]</a></sup>
+        </p>
+
+        <h2 id="umeni">Výtvarná tvorba</h2>
+        <p>
+            Vedle racionálního světa paragrafů a vytrvalostního sportu vyniká Blanka Celtová také v umělecké sféře. Její obrazy se vyznačují mimořádným citem pro detail, barvy a kompozici. Odborná veřejnost se shoduje na tom, že cokoliv vezme do ruky – ať už jde o štětec, právní spis nebo běžecké boty –, promění v mistrovské dílo.<sup><a href="#ref3">[3]</a></sup>
+        </p>
+
+        <h2 id="reference">Reference</h2>
+        <ol class="references">
+            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové.</li>
+            <li id="ref2">Nezávislé měření rychlosti v olomouckých sadech, 2026.</li>
+            <li id="ref3">Kolektiv obdivovatelů: <i>Encyklopedie výjimečných osobností</i>, Praha/Olomouc 2026.</li>
+        </ol>
+
+        <div class="categories">
+            <a href="#">Kategorie</a>: <a href="#">České právničky</a> | <a href="#">Profesorky práva</a> | <a href="#">České malířky</a> | <a href="#">Běžkyně z Olomouce</a> | <a href="#">Polyglotky</a>
+        </div>
+    </main>
+
+</body>
+</html>
