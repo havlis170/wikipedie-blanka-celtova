@@ -14,7 +14,7 @@
             line-height: 1.6;
         }
 
-        /* --- HACKER OVERLAY (Úvodní terminál) --- */
+        /* --- HACKER OVERLAY (Úvodní terminál s výběrem) --- */
         #hacker-overlay {
             position: fixed;
             inset: 0;
@@ -26,7 +26,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
+            overflow-y: auto;
         }
         #hacker-overlay.fade-out {
             opacity: 0;
@@ -35,42 +36,76 @@
         .terminal-window {
             max-width: 780px;
             width: 100%;
-            margin: 40px auto 0 auto;
+            margin: 30px auto 0 auto;
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.65;
         }
         .terminal-line {
             margin-bottom: 8px;
             word-break: break-word;
         }
         .terminal-highlight {
-            color: #ffffff;
-            background-color: #008f11;
-            padding: 2px 6px;
+            color: #050805;
+            background-color: #00ff41;
+            padding: 3px 8px;
             font-weight: bold;
+            display: inline-block;
+            margin-top: 4px;
         }
         .terminal-warn {
             color: #ffcc00;
         }
-        .terminal-link {
-            color: #00e5ff;
-            text-decoration: underline;
-            font-weight: bold;
+        /* Výběrová tlačítka v terminálu */
+        #terminal-choices {
+            display: none;
+            margin-top: 28px;
+            padding: 20px;
+            border: 1px solid #00ff41;
+            background-color: rgba(0, 255, 65, 0.06);
+            animation: fadeIn 0.4s ease;
         }
-        .terminal-link:hover {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .choice-title {
             color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 14px;
+            font-size: 15px;
         }
-        .cursor {
+        .choice-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .hack-choice-btn {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 18px;
+            cursor: pointer;
+            text-decoration: none;
             display: inline-block;
-            width: 9px;
-            height: 16px;
-            background-color: #00ff41;
-            vertical-align: middle;
-            animation: blink 0.8s infinite;
+            transition: all 0.15s ease;
         }
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
+        .btn-primary-hack {
+            background-color: #00ff41;
+            color: #050805;
+            border: 2px solid #00ff41;
+        }
+        .btn-primary-hack:hover {
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+        .btn-secondary-hack {
+            background-color: #003b73;
+            color: #ffffff;
+            border: 2px solid #3399ff;
+        }
+        .btn-secondary-hack:hover {
+            background-color: #0055a5;
+            border-color: #ffffff;
         }
         .skip-btn {
             align-self: flex-end;
@@ -81,6 +116,7 @@
             padding: 6px 12px;
             cursor: pointer;
             font-size: 12px;
+            margin-top: 20px;
         }
         .skip-btn:hover {
             background: #00ff41;
@@ -185,7 +221,7 @@
         .secret-banner {
             background-color: #eef3f8;
             border: 1px solid #a2a9b1;
-            border-left: 4px solid #3366cc;
+            border-left: 4px solid #004990;
             padding: 10px 14px;
             font-size: 13px;
             margin-bottom: 16px;
@@ -204,9 +240,9 @@
         .upol-link-btn {
             background-color: #004990;
             color: #ffffff !important;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 2px;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 600;
             text-decoration: none !important;
         }
@@ -369,17 +405,29 @@
                 font-size: 13px;
                 margin-top: 10px;
             }
+            .hack-choice-btn {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hackerská úvodní obrazovka -->
+    <!-- Hackerská úvodní obrazovka s rozcestníkem -->
     <div id="hacker-overlay">
-        <div class="terminal-window" id="terminal-output">
-            <div class="terminal-line">root@mainframe:~$ <span class="cursor"></span></div>
+        <div class="terminal-window">
+            <div id="terminal-output"></div>
+            <div id="terminal-choices">
+                <div class="choice-title">&gt; SYSTÉM PŘIPRAVEN. Zvolte cílový dešifrovaný záznam:</div>
+                <div class="choice-buttons">
+                    <button class="hack-choice-btn btn-primary-hack" onclick="closeHack()">[ 1. OTEVŘÍT WIKIPEDII ]</button>
+                    <a class="hack-choice-btn btn-secondary-hack" href="https://havlis170.github.io/upol-aktuality/">[ 2. OTEVŘÍT ZÁZNAM PF UPOL &rarr; ]</a>
+                </div>
+            </div>
         </div>
-        <button class="skip-btn" onclick="closeHack()">[ Přeskočit dekódování ]</button>
+        <button class="skip-btn" onclick="showChoicesImmediately()">[ Přeskočit čekání ]</button>
     </div>
 
     <header class="wiki-header">
@@ -412,7 +460,7 @@
         <div class="secret-banner">
             <span>🔓 <b>Odtajněný záznam:</b> Data úspěšně extrahována ze serveru Právnické fakulty v Olomouci.</span>
             <div class="banner-actions">
-                <a href="upol.html" class="upol-link-btn">Zobrazit zdrojový spis PF UP &rarr;</a>
+                <a href="https://havlis170.github.io/upol-aktuality/" class="upol-link-btn">Přejít na hacknutý web PF UPOL &rarr;</a>
                 <button class="replay-hack" onclick="startHack()">Přehrát znovu hack</button>
             </div>
         </div>
@@ -433,7 +481,7 @@
                 </tr>
                 <tr>
                     <th>Působiště</th>
-                    <td><a href="upol.html">Právnická fakulta UP, Olomouc</a></td>
+                    <td><a href="https://havlis170.github.io/upol-aktuality/">Právnická fakulta UP, Olomouc</a></td>
                 </tr>
                 <tr>
                     <th>Jazyky</th>
@@ -451,7 +499,7 @@
         </aside>
 
         <p>
-            <b>prof. JUDr. Blanka Celtová</b> je významná česká právnička, vysokoškolská pedagožka, polyglotka, malířka a rekordmanka v běhu, působící na <a href="upol.html">Právnické fakultě v Olomouci</a>. V odborných i společenských kruzích je proslulá unikátní kombinací špičkového právního intelektu, mimořádného uměleckého nadání a běžeckého tempa, kterému podle očitých svědků nestíhají ani místní tramvaje.<sup><a href="#ref2">[2]</a></sup>
+            <b>prof. JUDr. Blanka Celtová</b> je významná česká právnička, vysokoškolská pedagožka, polyglotka, malířka a rekordmanka v běhu, působící na <a href="https://havlis170.github.io/upol-aktuality/">Právnické fakultě v Olomouci</a>. V odborných i společenských kruzích je proslulá unikátní kombinací špičkového právního intelektu, mimořádného uměleckého nadání a běžeckého tempa, kterému podle očitých svědků nestíhají ani místní tramvaje.<sup><a href="#ref2">[2]</a></sup>
         </p>
 
         <div class="toc">
@@ -496,9 +544,9 @@
 
         <h2 id="reference">Reference</h2>
         <ol class="references">
-            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové (<a href="upol.html">extrahováno z tajného fakultního trezoru PF UP</a>).</li>
+            <li id="ref1">Osobní sdělení a historické záznamy z dětství Blanky Celtové (<a href="https://havlis170.github.io/upol-aktuality/">extrahováno z tajného fakultního trezoru PF UP</a>).</li>
             <li id="ref2">Nezávislé měření rychlosti v olomouckých sadech, 2026.</li>
-            <li id="ref3"><a href="upol.html">Mimořádné usnesení kolegia děkana PF UPOL: Síň slávy</a>, Olomouc 2026.</li>
+            <li id="ref3"><a href="https://havlis170.github.io/upol-aktuality/">Mimořádné usnesení kolegia děkana PF UPOL: Síň slávy</a>, Olomouc 2026.</li>
         </ol>
 
         <div class="categories">
@@ -508,46 +556,57 @@
 
     <script>
         const lines = [
-            { text: "> Navazuji spojení se serverem: pf.upol.cz (Právnická fakulta Olomouc)...", delay: 300 },
-            { text: "> Obcházím fakultní firewall... [OK]", delay: 950 },
-            { text: "> Hledám tajnou složku: 'prof. JUDr. Blanka Celtová'...", delay: 1650, warn: true },
-            { text: "> Nalezeno: 1 přísně tajný spis (Jazyky: 4 | Běh: MAX | Umění: 100%)", delay: 2450 },
-            { html: '> Záloha původního dokumentu fakulty: <a href="upol.html" class="terminal-link">[pf.upol.cz/sin-slavy/blanka-celtova]</a>', delay: 3250 },
-            { text: "> PŘÍSTUP POVOLEN. Otevírám profil na Wikipedii...", delay: 4200, highlight: true }
+            { text: "> Navazuji spojení se serverem: pf.upol.cz (Právnická fakulta Olomouc)...", delay: 250 },
+            { text: "> Obcházím fakultní firewall... [OK]", delay: 800 },
+            { text: "> Hledám tajnou složku: 'prof. JUDr. Blanka Celtová'...", delay: 1400, warn: true },
+            { text: "> Nalezeno: 2 záznamy (Encyklopedický profil + Interní spis PF UPOL)", delay: 2050 },
+            { text: "> PŘÍSTUP POVOLEN. Dekódování dokončeno.", delay: 2700, highlight: true }
         ];
 
         let timers = [];
 
+        function appendLine(line) {
+            const output = document.getElementById("terminal-output");
+            const div = document.createElement("div");
+            div.className = "terminal-line";
+            if (line.warn) div.classList.add("terminal-warn");
+            if (line.highlight) {
+                div.innerHTML = `<span class="terminal-highlight">${line.text}</span>`;
+            } else {
+                div.textContent = line.text;
+            }
+            output.appendChild(div);
+        }
+
         function startHack() {
             const overlay = document.getElementById("hacker-overlay");
             const output = document.getElementById("terminal-output");
+            const choices = document.getElementById("terminal-choices");
             timers.forEach(t => clearTimeout(t));
             timers = [];
             output.innerHTML = "";
+            choices.style.display = "none";
             overlay.style.display = "flex";
             overlay.classList.remove("fade-out");
 
             lines.forEach((line) => {
-                const t = setTimeout(() => {
-                    const div = document.createElement("div");
-                    div.className = "terminal-line";
-                    if (line.warn) div.classList.add("terminal-warn");
-                    if (line.highlight) {
-                        div.innerHTML = `<span class="terminal-highlight">${line.text}</span>`;
-                    } else if (line.html) {
-                        div.innerHTML = line.html;
-                    } else {
-                        div.textContent = line.text;
-                    }
-                    output.appendChild(div);
-                }, line.delay);
+                const t = setTimeout(() => appendLine(line), line.delay);
                 timers.push(t);
             });
 
-            const endTimer = setTimeout(() => {
-                closeHack();
-            }, 5600);
-            timers.push(endTimer);
+            const choiceTimer = setTimeout(() => {
+                choices.style.display = "block";
+            }, 3200);
+            timers.push(choiceTimer);
+        }
+
+        function showChoicesImmediately() {
+            timers.forEach(t => clearTimeout(t));
+            const output = document.getElementById("terminal-output");
+            const choices = document.getElementById("terminal-choices");
+            output.innerHTML = "";
+            lines.forEach(line => appendLine(line));
+            choices.style.display = "block";
         }
 
         function closeHack() {
@@ -556,7 +615,7 @@
             overlay.classList.add("fade-out");
             setTimeout(() => {
                 overlay.style.display = "none";
-            }, 800);
+            }, 600);
         }
 
         window.onload = startHack;
